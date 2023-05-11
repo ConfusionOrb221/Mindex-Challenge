@@ -31,9 +31,11 @@ public class ReportingStructureController {
         // There seems to be a bug in the current codebase where the getDirectReports is empty after
         // one loop or the persistence of these objects appears to get lost. This is why i run the size command
         // once here and then pass it to the recursive function or else it just becomes null immediately.
-        total = employee.getDirectReports().size();
-        for (Employee reports : employee.getDirectReports()) {
-            reportingStructure.findAllReports(reports, total);
+        if (employee.getDirectReports() != null) {
+            total = employee.getDirectReports().size();
+            for (Employee reports : employee.getDirectReports()) {
+                reportingStructure.findAllReports(reports, total);
+            }
         }
         reportingStructure.setNumberOfReports(total);
 
